@@ -44,3 +44,36 @@ class Customer:
 # update Customer
 # list single Customer
 # list all customers
+
+def menu():
+    
+    print(
+        '''
+        ## Options Menu ##\n
+        [1] Add New Customer
+        [2] Update Customer
+        [3] Delete Customer
+        [4] List Single Customer
+        [5] List All Customers
+        [6] Exit
+        '''
+    )
+    option = int(input('Type an option number to start: \n'))
+    if option == 1:
+        print('Call New Customer method')
+    elif option == 2:
+        print('Call Update method')
+    elif option == 3:
+        print('Call Delete method')
+    elif option == 4:
+        print('Call list single method')
+    elif option == 5:
+        print('Call list all method')
+    elif option == 6:
+        print('You exited the program')
+    else:
+        print('Invalid option')
+        print('==============')
+        menu()
+
+menu()
