@@ -65,7 +65,7 @@ def menu():
     elif option == 3:
         print('Call Delete method')
     elif option == 4:
-        print('Call list single method')
+        listSingleCustomer()
     elif option == 5:
         print('Call list all method')
     elif option == 6:
@@ -91,5 +91,10 @@ def newCustomer():
     details = SHEET.worksheet('details')
     details.append_row([customer.name, customer.surname, customer.phone, customer.email, customer.address, customer.city, customer.country])
     print('New customer added to database!')
+
+def listSingleCustomer():
+    allCustomers = SHEET.worksheet('details').get_all_values()
+    for customer in allCustomers:
+        print(customer)
 
 menu()
