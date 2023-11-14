@@ -30,3 +30,19 @@ The deployment terminal is set to 80 columns by 24 rows. That means that each li
 ---
 
 Happy coding!
+
+
+## Errors
+
+While trying to append new customer to the Google Sheet I was getting this error:
+
+Traceback (most recent call last):
+  File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 95, in <module>
+    menu()
+  File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 62, in menu
+    newCustomer()
+  File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 92, in newCustomer
+    details.append_row(customer.name, customer.surname, customer.phone, customer.email, customer.address, customer.city, customer.country)
+TypeError: Worksheet.append_row() takes from 2 to 6 positional arguments but 8 were given
+
+By looking at some posts I understood why it was working in the Love Sandwiches project and not on mine, posts like this https://gis.stackexchange.com/questions/381046/python-error-typeerror-append-takes-at-most-5-arguments-6-given where saying the number of parameters taken by the method was 5, and then I noticed that the first param alone is taking inputs, but instead of a single value, it can take a set/list of inputs that will then be added to their respective columns in the worksheet.

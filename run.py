@@ -39,7 +39,6 @@ class Customer:
 
 
 #methods to be created:
-# add Customer
 # remove Customer
 # update Customer
 # list single Customer
@@ -87,7 +86,10 @@ def newCustomer():
     country = input('Country: \n')
 
     customer = Customer(name, surname, phone, email, address, city, country)
-    print('New customer created: ')
+    print('New customer created!')
     print(customer.name, customer.surname)
+    details = SHEET.worksheet('details')
+    details.append_row([customer.name, customer.surname, customer.phone, customer.email, customer.address, customer.city, customer.country])
+    print('New customer added to database!')
 
 menu()
