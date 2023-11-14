@@ -37,8 +37,8 @@ class Customer:
         self.city = city
         self.country = country
 
+
 #methods to be created:
-# menu options
 # add Customer
 # remove Customer
 # update Customer
@@ -60,7 +60,7 @@ def menu():
     )
     option = int(input('Type an option number to start: \n'))
     if option == 1:
-        print('Call New Customer method')
+        newCustomer()
     elif option == 2:
         print('Call Update method')
     elif option == 3:
@@ -75,5 +75,19 @@ def menu():
         print('Invalid option')
         print('==============')
         menu()
+    
+def newCustomer():
+    print('Enter new customer details: \n')
+    name = input('Name: \n')
+    surname = input('Surname: \n')
+    phone = input('Phone: \n')
+    email = input('Email: \n')
+    address = input('Address: \n')
+    city = input('City: \n')
+    country = input('Country: \n')
+
+    customer = Customer(name, surname, phone, email, address, city, country)
+    print('New customer created: ')
+    print(customer.name, customer.surname)
 
 menu()
