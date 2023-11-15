@@ -61,7 +61,7 @@ def menu():
     if option == 1:
         newCustomer()
     elif option == 2:
-        print('Call Update method')
+        updateCustomer()
     elif option == 3:
         print('Call Delete method')
     elif option == 4:
@@ -91,11 +91,13 @@ def newCustomer():
     country = input('Country: \n')
 
     customer = Customer(name, surname, phone, email, address, city, country)
-    print('New customer created!')
+    print('New customer created!\n')
     print(customer.name, customer.surname)
+    print('')
     details = SHEET.worksheet('details')
     details.append_row([customer.name, customer.surname, customer.phone, customer.email, customer.address, customer.city, customer.country])
-    print('New customer added to database!')
+    print('New customer added to database!\n')
+    menu()
 
 def listSingleCustomer():
     details = SHEET.worksheet('details').get_values()
@@ -143,10 +145,60 @@ def listAllCustomers():
     print('End of the list\n')
     menu()
 
-
 def deleteCustomer():
     print("delete")
 
+def updateCustomer():
+    details = SHEET.worksheet('details').get_values()
+    customers = {}
+    counter = 2
+    tempInd = 0
+    for index, values in enumerate(details):
+        if index == 0:
+            continue
+        if values:
+            customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
+            customers[customer.email] = {'ind': counter,'name': customer.name, 'surname': customer.surname, 'phone': customer.phone, 'email': customer.email,
+                                        'address': customer.address, 'city': customer.city, 'country': customer.country}
+            counter+=1
+        else:
+            None
 
+    key = input('Enter the email of the customer to update: \n')
+    if key in customers:
+        print('')
+        print('Customer found: \n')
+        print(customers[key])
+        print('')
+        tempInd = customers[key]['ind']
+    else:
+        print('')
+        print('===============')
+        print('## Not Found ##')
+        print('===============\n')
+        menu()
+    
+    print('Which detail do you want to update?\n')
+    print(
+        '''
+        [1] Name
+        [2] Surname
+        [3] Phone
+        [4] Email
+        [5] Address
+        [6] City
+        [6] Country
+        '''
+    )
+    print('')
+    inpt = input('Enter the option number: \n')
+    data = input('Enter the new value: \n')
+
+    if int(inpt) == 1:
+        SHEET.worksheet('details').update_cell(int(tempInd), 1, str(data))
+        print('Name has been updated.\n')
+        menu()
+    else:
+        print('Error')
 
 menu()
