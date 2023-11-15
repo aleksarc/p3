@@ -67,7 +67,7 @@ def menu():
     elif option == 4:
         listSingleCustomer()
     elif option == 5:
-        print('Call list all method')
+        listAllCustomers()
     elif option == 6:
         print('You exited the program')
     else:
@@ -93,8 +93,31 @@ def newCustomer():
     print('New customer added to database!')
 
 def listSingleCustomer():
-    allCustomers = SHEET.worksheet('details').get_all_values()
-    for customer in allCustomers:
+    #email = input('Please type customer email: \n')
+    #allCustomers = SHEET.worksheet('details').get_values()
+    details = SHEET.worksheet('details')
+    for customer in range(2,3):
         print(customer)
+
+def listAllCustomers():
+    details = SHEET.worksheet('details').get_values()
+    customers = []
+    for index, values in enumerate(details):
+        if index == 0:
+            continue
+        # value = values[0]
+        if values:
+            customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
+            customers.append(customer)
+        else:
+            None
+
+    for customer in customers:
+        print(customer.name, customer.surname, customer.email)
+
+
+def deleteCustomer():
+    print("delete")
+
 
 menu()

@@ -46,3 +46,6 @@ Traceback (most recent call last):
 TypeError: Worksheet.append_row() takes from 2 to 6 positional arguments but 8 were given
 
 By looking at some posts I understood why it was working in the Love Sandwiches project and not on mine, posts like this https://gis.stackexchange.com/questions/381046/python-error-typeerror-append-takes-at-most-5-arguments-6-given where saying the number of parameters taken by the method was 5, and then I noticed that the first param alone is taking inputs, but instead of a single value, it can take a set/list of inputs that will then be added to their respective columns in the worksheet.
+
+## References 
+Skip first row: https://stackoverflow.com/questions/30871545/iterating-through-a-list-of-lists-skip-the-first-list
