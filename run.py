@@ -69,10 +69,15 @@ def menu():
     elif option == 5:
         listAllCustomers()
     elif option == 6:
-        print('You exited the program')
+        print('')
+        print('======================')
+        print('## Program finished ##')
+        print('======================\n')
     else:
-        print('Invalid option')
-        print('==============')
+        print('')
+        print('====================')
+        print('## Invalid option ##')
+        print('====================\n')
         menu()
     
 def newCustomer():
@@ -106,10 +111,15 @@ def listSingleCustomer():
             None   
     key = input('Type customer email: \n')
     if key in customers:
+        print('')
+        print('Customer found: \n')
         print(customers[key])
+        print('')
     else:
-        print('Not Found')
-        print('==============')
+        print('')
+        print('===============')
+        print('## Not Found ##')
+        print('===============\n')
         menu()
 
 def listAllCustomers():
