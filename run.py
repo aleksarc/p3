@@ -57,7 +57,7 @@ def menu():
         [6] Exit
         '''
     )
-    option = int(input('Type an option number to start: \n'))
+    option = int(input('Type an option number: \n'))
     if option == 1:
         newCustomer()
     elif option == 2:
@@ -124,18 +124,24 @@ def listSingleCustomer():
 
 def listAllCustomers():
     details = SHEET.worksheet('details').get_values()
-    customers = []
+    customers = {}
     for index, values in enumerate(details):
         if index == 0:
             continue
         if values:
             customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
-            customers.append(customer)
+            customers[customer.email] = {'name': customer.name, 'surname': customer.surname, 'phone': customer.phone, 'email': customer.email,
+                                        'address': customer.address, 'city': customer.city, 'country': customer.country}
         else:
             None
 
-    for customer in customers:
-        print(customer.name, customer.surname, customer.email)
+    print('')
+    print('Listing all customers:\n')
+    for customer, values in customers.items():
+        print(str(values))
+    print('')
+    print('End of the list\n')
+    menu()
 
 
 def deleteCustomer():
