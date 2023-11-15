@@ -93,11 +93,24 @@ def newCustomer():
     print('New customer added to database!')
 
 def listSingleCustomer():
-    #email = input('Please type customer email: \n')
-    #allCustomers = SHEET.worksheet('details').get_values()
-    details = SHEET.worksheet('details')
-    for customer in range(2,3):
-        print(customer)
+    details = SHEET.worksheet('details').get_values()
+    customers = {}
+    for index, values in enumerate(details):
+        if index == 0:
+            continue
+        if values:
+            customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
+            customers[customer.email] = {'name': customer.name, 'surname': customer.surname, 'phone': customer.phone, 'email': customer.email,
+                                        'address': customer.address, 'city': customer.city, 'country': customer.country}
+        else:
+            None   
+    key = input('Type customer email: \n')
+    if key in customers:
+        print(customers[key])
+    else:
+        print('Not Found')
+        print('==============')
+        menu()
 
 def listAllCustomers():
     details = SHEET.worksheet('details').get_values()
@@ -105,7 +118,6 @@ def listAllCustomers():
     for index, values in enumerate(details):
         if index == 0:
             continue
-        # value = values[0]
         if values:
             customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
             customers.append(customer)
@@ -118,6 +130,7 @@ def listAllCustomers():
 
 def deleteCustomer():
     print("delete")
+
 
 
 menu()
