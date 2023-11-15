@@ -93,7 +93,7 @@ def newCustomer():
 
     customer = Customer(name, surname, phone, email, address, city, country)
     print('New customer created!\n')
-    print(customer.name, customer.surname)
+    print(customer.name, customer.surname, customer.phone, customer.email, customer.address, customer.city, customer.country)
     print('')
     details = SHEET.worksheet('details')
     details.append_row([customer.name, customer.surname, customer.phone, customer.email, customer.address, customer.city, customer.country])
@@ -200,6 +200,7 @@ def updateCustomer():
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 1, str(data))
+        customers[key]['name'] = data
         print('')
         print('Name has been updated.')
         print('')
@@ -214,6 +215,7 @@ def updateCustomer():
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 2, str(data))
+        customers[key]['surname'] = data
         print('')
         print('Surname has been updated.')
         print('')
@@ -228,6 +230,7 @@ def updateCustomer():
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 3, str(data))
+        customers[key]['phone'] = data
         print('')
         print('Phone has been updated.')
         print('')
@@ -259,6 +262,7 @@ def updateCustomer():
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 5, str(data))
+        customers[key]['address'] = data
         print('')
         print('Address has been updated.')
         print('')
@@ -273,6 +277,7 @@ def updateCustomer():
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 6, str(data))
+        customers[key]['city'] = data
         print('')
         print('City has been updated.')
         print('')
@@ -287,6 +292,7 @@ def updateCustomer():
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 7, str(data))
+        customers[key]['country'] = data
         print('')
         print('Country has been updated.')
         print('')
@@ -296,7 +302,8 @@ def updateCustomer():
         print('')
         menu()
     else:
-        print('Something went wrong :(\n')
+        print('Something went wrong :(')
+        print('')
         menu()
 
 menu()
