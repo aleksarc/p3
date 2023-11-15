@@ -49,3 +49,5 @@ By looking at some posts I understood why it was working in the Love Sandwiches 
 
 ## References 
 Skip first row: https://stackoverflow.com/questions/30871545/iterating-through-a-list-of-lists-skip-the-first-list
+
+Concepts of working with Dictionaries in Python: https://www.youtube.com/watch?v=Ye7HS0JXNYE&t=2s

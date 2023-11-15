@@ -18,16 +18,17 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('customers')
 
-"""
-Customer Class
-This is the main class which sets the attributes and methods used to manipulated customer's database
-"""
 class Customer:
     """
-    __init__
-    constructor used to create a new instance of the the Customer Class
+    Customer Class
+    This is the main class which sets the attributes and methods used to manipulated customer's database
     """
+    
     def __init__(self, name, surname, phone, email, address, city, country):
+        """
+        __init__
+        constructor used to create a new instance of the the Customer Class
+        """
         self.name = name
         self.surname = surname
         self.phone = phone
@@ -35,7 +36,6 @@ class Customer:
         self.address = address
         self.city = city
         self.country = country
-
 
 #methods to be developed:
 # remove Customer
