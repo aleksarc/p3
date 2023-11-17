@@ -37,9 +37,6 @@ class Customer:
         self.city = city
         self.country = country
 
-#methods to be developed:
-# remove Customer
-
 def menu():
     """
     The meny method will display options to the user.
@@ -70,10 +67,10 @@ def menu():
     elif option == 5:
         listAllCustomers()
     elif option == 6:
-        print('')
         print('======================')
         print('## Program finished ##')
         print('======================\n')
+        print('')
     else:
         print('')
         print('====================')
@@ -99,12 +96,13 @@ def newCustomer():
     country = input('Country: \n')
 
     customer = Customer(name, surname, phone, email, address, city, country)
-    print('New customer created!\n')
+    print('')
+    print('New customer created:\n')
     print(customer.name, customer.surname, customer.phone, customer.email, customer.address, customer.city, customer.country)
     print('')
     details = SHEET.worksheet('details')
     details.append_row([customer.name, customer.surname, customer.phone, customer.email, customer.address, customer.city, customer.country])
-    print('New customer added to database!\n')
+    print('New customer added to database!')
     menu()
 
 def listSingleCustomer():
@@ -129,7 +127,7 @@ def listSingleCustomer():
         print('')
         print('Customer found: \n')
         print(customers[key])
-        print('')
+        menu()
     else:
         print('')
         print('===============')
@@ -154,7 +152,6 @@ def listAllCustomers():
         else:
             None
 
-    print('')
     print('Listing all customers:\n')
     for customer, values in customers.items():
         print(str(values))
@@ -211,10 +208,9 @@ def updateCustomer():
         [4] Email
         [5] Address
         [6] City
-        [6] Country
+        [7] Country
         '''
     )
-    print('')
     inpt = input('Enter the option number: \n')
 
     if int(inpt) == 1:
@@ -345,7 +341,6 @@ def deleteCustomer():
         print('')
         print('Customer found: \n')
         print(customers[key])
-        print('')
         tempInd = customers[key]['ind']
     else:
         print('')
