@@ -103,15 +103,18 @@ def newCustomer():
     #validate name input for letters only)
     name = validateString(input('Name: \n'))
     print('')
+    #validate lastname input for letters only)
     lastname = validateString(input('Last Name: \n'))
     print('')
     phone = input('Phone: \n')
     print('')
     address = input('Address: \n')
     print('')
-    city = input('City: \n')
+    #validate lastname input for letters only)
+    city =validateString(input('City: \n'))
     print('')
-    country = input('Country: \n')
+    #validate lastname input for letters only)
+    country = validateString(input('Country: \n'))
 
     customer = Customer(name, lastname, phone, email, address, city, country)
     print('')
@@ -136,7 +139,7 @@ def listSingleCustomer():
             continue
         if values:
             customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
-            customers[customer.email] = {'name': customer.name, 'surname': customer.surname, 'phone': customer.phone, 'email': customer.email,
+            customers[customer.email] = {'name': customer.name, 'lastname': customer.lastname, 'phone': customer.phone, 'email': customer.email,
                                         'address': customer.address, 'city': customer.city, 'country': customer.country}
         else:
             None   
@@ -165,7 +168,7 @@ def listAllCustomers():
             continue
         if values:
             customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
-            customers[customer.email] = {'name': customer.name, 'surname': customer.surname, 'phone': customer.phone, 'email': customer.email,
+            customers[customer.email] = {'name': customer.name, 'lastname': customer.lastname, 'phone': customer.phone, 'email': customer.email,
                                         'address': customer.address, 'city': customer.city, 'country': customer.country}
         else:
             None
@@ -197,7 +200,7 @@ def updateCustomer():
             continue
         if values:
             customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
-            customers[customer.email] = {'ind': counter,'name': customer.name, 'surname': customer.surname, 'phone': customer.phone, 'email': customer.email,
+            customers[customer.email] = {'ind': counter,'name': customer.name, 'lastname': customer.lastname, 'phone': customer.phone, 'email': customer.email,
                                         'address': customer.address, 'city': customer.city, 'country': customer.country}
             counter+=1
         else:
@@ -221,7 +224,7 @@ def updateCustomer():
     print(
         '''
         [1] Name
-        [2] Surname
+        [2] Last Name
         [3] Phone
         [4] Email
         [5] Address
@@ -251,9 +254,9 @@ def updateCustomer():
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 2, str(data))
-        customers[key]['surname'] = data
+        customers[key]['lastname'] = data
         print('')
-        print('Surname has been updated.')
+        print('Last Name has been updated.')
         print('')
         print('New customer details:')
         print('')
@@ -348,7 +351,7 @@ def deleteCustomer():
             continue
         if values:
             customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
-            customers[customer.email] = {'ind': counter,'name': customer.name, 'surname': customer.surname, 'phone': customer.phone, 'email': customer.email,
+            customers[customer.email] = {'ind': counter,'name': customer.name, 'lastname': customer.lastname, 'phone': customer.phone, 'email': customer.email,
                                         'address': customer.address, 'city': customer.city, 'country': customer.country}
             counter+=1
         else:
@@ -370,7 +373,7 @@ def deleteCustomer():
     print('Deleting customer...')
     SHEET.worksheet('details').delete_rows(int(tempInd))
     print('')
-    print(f'Customer {customers[key]['name']} {customers[key]['surname']} ({key}) was deleted.')
+    print(f'Customer {customers[key]['name']} {customers[key]['lastname']} ({key}) was deleted.')
     menu()
       
 def validateEmail(email):
