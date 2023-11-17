@@ -64,7 +64,7 @@ def menu():
     elif option == 2:
         updateCustomer()
     elif option == 3:
-        print('Call Delete method')
+        deleteCustomer()
     elif option == 4:
         listSingleCustomer()
     elif option == 5:
@@ -134,7 +134,7 @@ def listSingleCustomer():
         print('')
         print('===============')
         print('## Not Found ##')
-        print('===============\n')
+        print('===============')
         menu()
 
 def listAllCustomers():
@@ -159,7 +159,7 @@ def listAllCustomers():
     for customer, values in customers.items():
         print(str(values))
     print('')
-    print('End of the list\n')
+    print('End of the list')
     menu()
 
 def updateCustomer():
@@ -199,7 +199,7 @@ def updateCustomer():
         print('')
         print('===============')
         print('## Not Found ##')
-        print('===============\n')
+        print('===============')
         menu()
     
     print('Which detail do you want to update?')
@@ -230,7 +230,6 @@ def updateCustomer():
         print('New customer details:')
         print('')
         print(customers[key])
-        print('')
         menu()
     elif int(inpt) == 2:
         print('')
@@ -245,7 +244,6 @@ def updateCustomer():
         print('New customer details:')
         print('')
         print(customers[key])
-        print('')
         menu()
     elif int(inpt) == 3:
         print('')
@@ -260,7 +258,6 @@ def updateCustomer():
         print('New customer details:')
         print('')
         print(customers[key])
-        print('')
         menu()
     elif int(inpt) == 4:
         print('')
@@ -277,7 +274,6 @@ def updateCustomer():
         print('New customer details:')
         print('')
         print(customers[key])
-        print('')
         menu()
     elif int(inpt) == 5:
         print('')
@@ -292,7 +288,6 @@ def updateCustomer():
         print('New customer details:')
         print('')
         print(customers[key])
-        print('')
         menu()
     elif int(inpt) == 6:
         print('')
@@ -307,7 +302,6 @@ def updateCustomer():
         print('New customer details:')
         print('')
         print(customers[key])
-        print('')
         menu()
     elif int(inpt) == 7:
         print('')
@@ -322,17 +316,48 @@ def updateCustomer():
         print('New customer details:')
         print('')
         print(customers[key])
-        print('')
         menu()
     else:
         print('Something went wrong :(')
-        print('')
         menu()
 
 def deleteCustomer():
     """
-    Still studying a way to delete a row in Google Sheets, for the moment thinking to use deleteDimension.
+    ??????
     """
-    print("delete")
+    details = SHEET.worksheet('details').get_values()
+    customers = {}
+    counter = 2
+    tempInd = 0
+    for index, values in enumerate(details):
+        if index == 0:
+            continue
+        if values:
+            customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
+            customers[customer.email] = {'ind': counter,'name': customer.name, 'surname': customer.surname, 'phone': customer.phone, 'email': customer.email,
+                                        'address': customer.address, 'city': customer.city, 'country': customer.country}
+            counter+=1
+        else:
+            None
+    
+    key = input('Enter the email of the customer to delete: \n')
+    if key in customers:
+        print('')
+        print('Customer found: \n')
+        print(customers[key])
+        print('')
+        tempInd = customers[key]['ind']
+    else:
+        print('')
+        print('===============')
+        print('## Not Found ##')
+        print('===============')
+        menu()
+    print('')
+    print('Deleting customer...')
+    SHEET.worksheet('details').delete_rows(int(tempInd))
+    print('')
+    print(f'Customer {customers[key]['name']} {customers[key]['surname']} ({key}) was deleted.')
+    menu()
 
 menu()

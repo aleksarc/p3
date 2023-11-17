@@ -47,7 +47,23 @@ TypeError: Worksheet.append_row() takes from 2 to 6 positional arguments but 8 w
 
 By looking at some posts I understood why it was working in the Love Sandwiches project and not on mine, posts like this https://gis.stackexchange.com/questions/381046/python-error-typeerror-append-takes-at-most-5-arguments-6-given where saying the number of parameters taken by the method was 5, and then I noticed that the first param alone is taking inputs, but instead of a single value, it can take a set/list of inputs that will then be added to their respective columns in the worksheet.
 
+No critical erros, but during the developement some errors such as:
+
+Traceback (most recent call last):
+  File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 359, in <module>
+    menu()
+  File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 67, in menu
+    deleteCustomer()
+  File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 353, in deleteCustomer
+    SHEET.worksheet('details').delete_rows(int(key))
+                                           ^^^^^^^^
+ValueError: invalid literal for int() with base 10: 'email'
+
+These type of errors were resolved by adjusting the code to pass the intended value, and the program resumed to the expected behaviour.
+
 ## References 
 Skip first row: https://stackoverflow.com/questions/30871545/iterating-through-a-list-of-lists-skip-the-first-list
 
 Concepts of working with Dictionaries in Python: https://www.youtube.com/watch?v=Ye7HS0JXNYE&t=2s
+
+Delete rows: https://www.youtube.com/watch?v=6H6pNXFZZg8&t=423s
