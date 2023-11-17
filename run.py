@@ -1,6 +1,7 @@
 """
 Imported resources to make it possible working with Google Drive and Google Sheets
 """
+import re
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -52,6 +53,7 @@ def menu():
         [4] List Single Customer
         [5] List All Customers
         [6] Exit
+        [7] email
         '''
     )
     option = int(input('Type an option number: \n'))
@@ -71,6 +73,9 @@ def menu():
         print('## Program finished ##')
         print('======================\n')
         print('')
+    elif option == 7:
+        email = input('Enter email: \n')
+        validateEmail(email)
     else:
         print('')
         print('====================')
@@ -90,7 +95,7 @@ def newCustomer():
     name = input('Name: \n')
     surname = input('Surname: \n')
     phone = input('Phone: \n')
-    email = input('Email: \n')
+    email = validateEmail(input('Email: \n'))
     address = input('Address: \n')
     city = input('City: \n')
     country = input('Country: \n')
@@ -354,5 +359,12 @@ def deleteCustomer():
     print('')
     print(f'Customer {customers[key]['name']} {customers[key]['surname']} ({key}) was deleted.')
     menu()
-
+      
+def validateEmail(email):
+    regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+    if(re.search(regex,email)) == None:
+        print('!!! Invalid email address !!!')
+        validateEmail(input('Enter email (e.g. email@email.com): \n'))
+    else:
+        return email
 menu()

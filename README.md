@@ -34,7 +34,7 @@ Happy coding!
 
 ## Errors
 
-While trying to append new customer to the Google Sheet I was getting this error:
+### 1 While trying to append new customer to the Google Sheet I was getting this error:
 
 Traceback (most recent call last):
   File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 95, in <module>
@@ -47,7 +47,7 @@ TypeError: Worksheet.append_row() takes from 2 to 6 positional arguments but 8 w
 
 By looking at some posts I understood why it was working in the Love Sandwiches project and not on mine, posts like this https://gis.stackexchange.com/questions/381046/python-error-typeerror-append-takes-at-most-5-arguments-6-given where saying the number of parameters taken by the method was 5, and then I noticed that the first param alone is taking inputs, but instead of a single value, it can take a set/list of inputs that will then be added to their respective columns in the worksheet.
 
-No critical erros, but during the developement some errors such as:
+### 2 During the developement some errors such as:
 
 Traceback (most recent call last):
   File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 359, in <module>
@@ -60,6 +60,15 @@ Traceback (most recent call last):
 ValueError: invalid literal for int() with base 10: 'email'
 
 These type of errors were resolved by adjusting the code to pass the intended value, and the program resumed to the expected behaviour.
+
+### 3 Error invalid escape sequence
+In the method to validate email, a regex uses a escape bar that causes a warning in Python:
+
+python3 run.py
+/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py:364: SyntaxWarning: invalid escape sequence '\.'
+  regex = '^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
+
+Resolution: As the regex cannot be changed, added the r for raw string as suggested in https://stackoverflow.com/questions/52335970/how-to-fix-string-deprecationwarning-invalid-escape-sequence-in-python
 
 ## References 
 Skip first row: https://stackoverflow.com/questions/30871545/iterating-through-a-list-of-lists-skip-the-first-list
