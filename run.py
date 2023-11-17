@@ -25,13 +25,13 @@ class Customer:
     This is the main class which sets the attributes and methods used to manipulated customer's database
     """
     
-    def __init__(self, name, surname, phone, email, address, city, country):
+    def __init__(self, name, lastname, phone, email, address, city, country):
         """
         __init__
         constructor used to create a new instance of the the Customer Class
         """
         self.name = name
-        self.surname = surname
+        self.lastname = lastname
         self.phone = phone
         self.email = email
         self.address = address
@@ -100,9 +100,10 @@ def newCustomer():
     #check duplicate email addresses
     email = checkDuplicate(tempEmail)
     print('')
-    name = input('Name: \n')
+    #validate name input for letters only)
+    name = validateString(input('Name: \n'))
     print('')
-    surname = input('Surname: \n')
+    lastname = validateString(input('Last Name: \n'))
     print('')
     phone = input('Phone: \n')
     print('')
@@ -112,13 +113,13 @@ def newCustomer():
     print('')
     country = input('Country: \n')
 
-    customer = Customer(name, surname, phone, email, address, city, country)
+    customer = Customer(name, lastname, phone, email, address, city, country)
     print('')
     print('New customer created:\n')
-    print(customer.name, customer.surname, customer.phone, customer.email, customer.address, customer.city, customer.country)
+    print(customer.name, customer.lastname, customer.phone, customer.email, customer.address, customer.city, customer.country)
     print('')
     details = SHEET.worksheet('details')
-    details.append_row([customer.name, customer.surname, customer.phone, customer.email, customer.address, customer.city, customer.country])
+    details.append_row([customer.name, customer.lastname, customer.phone, customer.email, customer.address, customer.city, customer.country])
     print('New customer added to database!')
     menu()
 
@@ -386,7 +387,6 @@ def validateEmail(email):
         email = validateEmail(input('Enter email (e.g. email@email.com): \n'))
         return email
     else:
-        print(f'Email no else do validate: {email}')
         return email
 
 def checkDuplicate(email):
@@ -394,6 +394,8 @@ def checkDuplicate(email):
     The checkDuplicate() method will retrieve a list with current emails existing in the GoogleSheet and
     in case the email already exists, it will request the user to input a new email address, otherwise
     add the inputed email to the correspondent attribute of new customer.
+    This method also calls for validateEmail() as the user might need to input a new address in case
+    the inputed email already exists.
     """
     currentList = SHEET.worksheet('details').col_values(4)
     if (email in currentList):
@@ -405,5 +407,12 @@ def checkDuplicate(email):
         return email
     else:
         return email
+
+def validateString(data):
+    if data.isalpha():
+        return data
+    else:
+        data = validateString(input('Invalid input, enter new value (only letters allowed: )\n'))
+        return data
 
 menu()
