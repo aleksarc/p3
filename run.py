@@ -1,12 +1,14 @@
 """
-Imported resources to make it possible working with Google Drive and Google Sheets
+Imported resources to make it possible working with Google Drive and Google
+Sheets
 """
 import re
 import gspread
 from google.oauth2.service_account import Credentials
 
 """
-Scope and credentials defining the extension of access the project has do Google through APIs
+Scope and credentials defining the access the project has to
+Google through APIs
 """
 SCOPE = [
     "https://www.googleapis.com/auth/spreadsheets",
@@ -19,13 +21,15 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('customers')
 
+
 class Customer:
     """
     Customer Class
-    This is the main class which sets the attributes and methods used to manipulated customer's database
+    This is the main class which sets the attributes and methods used
+    to manipulated customer's database
     """
-    
-    def __init__(self, name, lastname, phone, email, address, city, country):
+    def __init__(self, name, lastname, phone, email, address, city,
+                 country):
         """
         __init__
         constructor used to create a new instance of the the Customer Class
@@ -38,11 +42,14 @@ class Customer:
         self.city = city
         self.country = country
 
+
 def menu():
     """
     The meny method will display options to the user.
-    Each option will call the respective method to perform an action in the customers database.
-    The user should type an available option based on the numbers presented along with their actions.
+    Each option will call the respective method to perform an action in the
+    customers database.
+    The user should type an available option based on the numbers presented
+    along with their actions.
     """
     print(
         '''
@@ -53,7 +60,6 @@ def menu():
         [4] List Single Customer
         [5] List All Customers
         [6] Exit
-        [7] email
         '''
     )
     option = int(input('Type an option number: \n'))
@@ -82,57 +88,78 @@ def menu():
         print('## Invalid option ##')
         print('====================\n')
         menu()
-    
+
+
 def newCustomer():
     """
-    The newCustomer() method is used to create a new instance of the Customer Class as well as send
+    The newCustomer() method is used to create a new instance of the
+    Customer Class as well as send
     new customer's detais to the Google Sheet using gspread.
-    The user will be requested a series of input fields in order to create the new customer.
-    The method will then call the constructor of the Customer Class passing the inputed details as parameters
-    and also use the apend_row method of worksheets to add a new line (new customer) to the Google Sheet
+    The user will be requested a series of input fields in order to create
+    the new customer.
+    The method will then call the constructor of the Customer Class passing
+    the inputed details as parameters
+    and also use the apend_row method of worksheets to add a new line
+    (new customer) to the Google Sheet
     """
     print("Let's crete a new customer!")
-    print('Note: Email address will be used as a customer key and must be unique.')
-    print("If you are not sure of existing email addresses, use the List All Customers option to review the customer's list.")
+    print('Note: Email address will be used as a customer key and must be' +
+          'unique.')
+    print("If you are not sure of existing email addresses, use the List" +
+          "All Customers option to review the customer's list.")
     print('Provide new customer details as requested below:\n')
-    #check input for a valid email pattern
+    # check input for a valid email pattern
     tempEmail = validateEmail(input('Email: \n'))
-    #check duplicate email addresses
+    # check duplicate email addresses
     email = checkDuplicate(tempEmail)
     print('')
-    #validate name input for letters only)
+    # validate name input for letters only)
     tempName = validateString(input('Name: \n'))
-    #check if value is empty or null
+    # check if value is empty or null
     name = checkNonEmptyNull(tempName)
     print('')
-    #validate lastname input for letters only)
-    lastname = validateString(input('Last Name: \n'))
+    # validate lastname input for letters only)
+    templastname = validateString(input('Last Name: \n'))
+    # check if value is empty or null
+    lastname = checkNonEmptyNull(templastname)
     print('')
-    phone = input('Phone: \n')
+    phone = validatePhone(input('Phone: \n'))
     print('')
     address = input('Address: \n')
     print('')
-    #validate lastname input for letters only)
-    city =validateString(input('City: \n'))
+    # validate lastname input for letters only)
+    tempcity = validateString(input('City: \n'))
+    # check if value is empty or null
+    city = checkNonEmptyNull(tempcity)
     print('')
-    #validate lastname input for letters only)
-    country = validateString(input('Country: \n'))
+    # validate lastname input for letters only)
+    tempcountry = validateString(input('Country: \n'))
+    # check if value is empty or null
+    country = checkNonEmptyNull(tempcountry)
 
-    customer = Customer(name, lastname, phone, email, address, city, country)
+    customer = Customer(name, lastname, phone, email, address, city,
+                        country)
     print('')
     print('New customer created:\n')
-    print(customer.name, customer.lastname, customer.phone, customer.email, customer.address, customer.city, customer.country)
+    print(customer.name, customer.lastname, customer.phone, customer.email,
+          customer.address, customer.city, customer.country)
     print('')
     details = SHEET.worksheet('details')
-    details.append_row([customer.name, customer.lastname, customer.phone, customer.email, customer.address, customer.city, customer.country])
+    details.append_row([customer.name, customer.lastname, customer.phone,
+                        customer.email, customer.address, customer.city,
+                        customer.country])
     print('New customer added to database!')
     menu()
 
+
 def listSingleCustomer():
     """
-    The listSingleCustomer() method will create an object retrieving all details from customers available in Google Sheets
-    These details will be inserted into a Dictionary that will then allow for search by key (which is defined as email).
-    The user will be requested the key/email as input and the system prints the details of the customer based on the provided key/email.
+    The listSingleCustomer() method will create an object retrieving all
+    details from customers available in Google Sheets
+    These details will be inserted into a Dictionary that will then allow
+    for search by key (which is defined as email).
+    The user will be requested the key/email as input and the system prints
+    the details of the customer based on the provided key/email.
     """
     details = SHEET.worksheet('details').get_values()
     customers = {}
@@ -140,11 +167,17 @@ def listSingleCustomer():
         if index == 0:
             continue
         if values:
-            customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
-            customers[customer.email] = {'name': customer.name, 'lastname': customer.lastname, 'phone': customer.phone, 'email': customer.email,
-                                        'address': customer.address, 'city': customer.city, 'country': customer.country}
+            customer = Customer(values[0], values[1], values[2], values[3],
+                                values[4], values[5], values[6])
+            customers[customer.email] = {'name': customer.name,
+                                         'lastname': customer.lastname,
+                                         'phone': customer.phone,
+                                         'email': customer.email,
+                                         'address': customer.address,
+                                         'city': customer.city,
+                                         'country': customer.country}
         else:
-            None   
+            None
     key = input('Type customer email: \n')
     if key in customers:
         print('')
@@ -158,10 +191,13 @@ def listSingleCustomer():
         print('===============')
         menu()
 
+
 def listAllCustomers():
     """
-    The listAllCustomers() method calls the get_values() Google Sheet method to retrieve all details available in the Google Sheet.
-    These details are inserted into a Dicitionary and printed as output for the user's visilibity.
+    The listAllCustomers() method calls the get_values() Google Sheet
+    method to retrieve all details available in the Google Sheet.
+    These details are inserted into a Dicitionary and printed as output
+    for the user's visilibity.
     """
     details = SHEET.worksheet('details').get_values()
     customers = {}
@@ -169,9 +205,15 @@ def listAllCustomers():
         if index == 0:
             continue
         if values:
-            customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
-            customers[customer.email] = {'name': customer.name, 'lastname': customer.lastname, 'phone': customer.phone, 'email': customer.email,
-                                        'address': customer.address, 'city': customer.city, 'country': customer.country}
+            customer = Customer(values[0], values[1], values[2], values[3],
+                                values[4], values[5], values[6])
+            customers[customer.email] = {'name': customer.name,
+                                         'lastname': customer.lastname,
+                                         'phone': customer.phone,
+                                         'email': customer.email,
+                                         'address': customer.address,
+                                         'city': customer.city,
+                                         'country': customer.country}
         else:
             None
 
@@ -182,16 +224,25 @@ def listAllCustomers():
     print('End of the list')
     menu()
 
+
 def updateCustomer():
     """
-    The updateCustomer() method retrieves all customers information from Google Sheet using the get_values() method and inserting the values into a
-    Dictionary.
-    The user will be presented with an options menu where they can choose which data to be updated in the customer's database. The user will also provide
-    the key/email of the customer to be updated.
-    Each option in the menu will bring the user to a different condition in the code, within the condition the new value will be requested/inputed from the user.
-    The new value is then passed to the Google Sheet with worksheet.update_cell() method and the local Dictionary is also updated to show new details to the user.
-    Because email is used as key for the Dictionary, whenever the user chooses to update the email field, the current customer is replaced by a new customer
-    in the Dictionary as there's no option to update the key value.
+    The updateCustomer() method retrieves all customers information from
+    Google Sheet using the get_values() method and inserting the values
+    into a Dictionary.
+    The user will be presented with an options menu where they can choose
+    which data to be updated in the customer's database. The user will also
+    provide the key/email of the customer to be updated.
+    Each option in the menu will bring the user to a different condition in
+    the code, within the condition the new value will be requested/inputed
+    from the user.
+    The new value is then passed to the Google Sheet with
+    worksheet.update_cell() method and the local Dictionary is also updated
+    to show new details to the user.
+    Because email is used as key for the Dictionary, whenever the user
+    chooses to update the email field, the current customer is replaced by
+    a new customer in the Dictionary as there's no option to update the key
+    value.
     """
     details = SHEET.worksheet('details').get_values()
     customers = {}
@@ -201,10 +252,17 @@ def updateCustomer():
         if index == 0:
             continue
         if values:
-            customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
-            customers[customer.email] = {'ind': counter,'name': customer.name, 'lastname': customer.lastname, 'phone': customer.phone, 'email': customer.email,
-                                        'address': customer.address, 'city': customer.city, 'country': customer.country}
-            counter+=1
+            customer = Customer(values[0], values[1], values[2], values[3],
+                                values[4], values[5], values[6])
+            customers[customer.email] = {'ind': counter,
+                                         'name': customer.name,
+                                         'lastname': customer.lastname,
+                                         'phone': customer.phone,
+                                         'email': customer.email,
+                                         'address': customer.address,
+                                         'city': customer.city,
+                                         'country': customer.country}
+            counter += 1
         else:
             None
 
@@ -221,7 +279,7 @@ def updateCustomer():
         print('## Not Found ##')
         print('===============')
         menu()
-    
+
     print('Which detail do you want to update?')
     print(
         '''
@@ -340,6 +398,7 @@ def updateCustomer():
         print('Something went wrong :(')
         menu()
 
+
 def deleteCustomer():
     """
     ??????
@@ -352,13 +411,20 @@ def deleteCustomer():
         if index == 0:
             continue
         if values:
-            customer = Customer(values[0],values[1],values[2], values[3], values[4], values[5], values[6])
-            customers[customer.email] = {'ind': counter,'name': customer.name, 'lastname': customer.lastname, 'phone': customer.phone, 'email': customer.email,
-                                        'address': customer.address, 'city': customer.city, 'country': customer.country}
-            counter+=1
+            customer = Customer(values[0], values[1], values[2], values[3],
+                                values[4], values[5], values[6])
+            customers[customer.email] = {'ind': counter,
+                                         'name': customer.name,
+                                         'lastname': customer.lastname,
+                                         'phone': customer.phone,
+                                         'email': customer.email,
+                                         'address': customer.address,
+                                         'city': customer.city,
+                                         'country': customer.country}
+            counter += 1
         else:
             None
-    
+
     key = input('Enter the email of the customer to delete: \n')
     if key in customers:
         print('')
@@ -375,31 +441,40 @@ def deleteCustomer():
     print('Deleting customer...')
     SHEET.worksheet('details').delete_rows(int(tempInd))
     print('')
-    print(f'Customer {customers[key]['name']} {customers[key]['lastname']} ({key}) was deleted.')
+    print(f'Customer {customers[key]['name']} {customers[key]['lastname']}'
+          + '({key}) was deleted.')
     menu()
-      
+
+
 def validateEmail(email):
     """
-    The validateEmail() method will check for valid characters inputed by the user.
-    Returns the email address to be added in the new customer record in case it's validated and
-    requests new input providing an example of acceptable pattern in case the user types an invalid email address.
-    Credits: https://acervolima.com/verifique-se-o-endereco-de-e-mail-e-valido-ou-nao-em-python/
+    The validateEmail() method will check for valid characters inputed by
+    the user.
+    Returns the email address to be added in the new customer record in
+    case it's validated and
+    requests new input providing an example of acceptable pattern in case
+    the user types an invalid email address.
     """
     regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
-    if(re.search(regex,email)) == None:
+    if (re.search(regex, email)) is None:
         print('!!! Invalid email address !!!')
         print('')
-        email = validateEmail(input('Enter email (e.g. email@email.com): \n'))
+        email = validateEmail(input('Enter email' +
+                                    '(e.g. email@email.com): \n'))
         return email
     else:
         return email
 
+
 def checkDuplicate(email):
     """
-    The checkDuplicate() method will retrieve a list with current emails existing in the GoogleSheet and
-    in case the email already exists, it will request the user to input a new email address, otherwise
+    The checkDuplicate() method will retrieve a list with current emails
+    existing in the GoogleSheet and
+    in case the email already exists, it will request the user to input a
+    new email address, otherwise
     add the inputed email to the correspondent attribute of new customer.
-    This method also calls for validateEmail() as the user might need to input a new address in case
+    This method also calls for validateEmail() as the user might need to
+    input a new address in case
     the inputed email already exists.
     """
     currentList = SHEET.worksheet('details').col_values(4)
@@ -413,17 +488,47 @@ def checkDuplicate(email):
     else:
         return email
 
+
 def validateString(data):
+    """
+    The validateString() method will check for letters only to prevent
+    the user from entering numbers or other characaters
+    where not expected
+    """
     if data.isalpha():
         return data
     else:
-        data = validateString(input('Invalid input, enter new value (only letters allowed): \n'))
+        data = validateString(input('Invalid input, enter new value (only' +
+                                    'letters allowed): \n'))
         return data
 
+
 def checkNonEmptyNull(data):
-    if data == None or data == '':
-        data = checkNonEmptyNull(input('Value cannot be empty or null. Type new value: \n'))
+    """
+    The checkNonEmptyNull() method validates if the inputed value is not
+    empty or null(None).
+    In case the user presses enter with no value, the method will require
+    a new input until the condition is satisfied.
+    """
+    if data is None or data == '':
+        data = checkNonEmptyNull(input('Value cannot be empty or null.' +
+                                       'Type new value: \n'))
         return data
     else:
         return data
+
+
+def validatePhone(phone):
+    if len(phone) > 10:
+        phone = validatePhone(input('Type phone number with max 10' +
+                                    'digits: \n'))
+        return phone
+    elif phone.isdecimal():
+        return phone
+    else:
+        phone = validatePhone(input('Type a valida phone (only numbers' +
+                                    'allowed): \n'))
+        return phone
+
+
 menu()

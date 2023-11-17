@@ -100,6 +100,91 @@ gspread.exceptions.APIError: {'code': 400, 'message': "Unable to parse range: 'd
 
 Resolution: replace get_values() by col_values(): SHEET.worksheet('details').col_values(4)
 
+### 5 PIP8 Heroku validation errors found:
+
+Results:
+24: E302 expected 2 blank lines, found 1
+30: W293 blank line contains whitespace
+45: E302 expected 2 blank lines, found 1
+90: W293 blank line contains whitespace
+91: E302 expected 2 blank lines, found 1
+104: E225 missing whitespace around operator
+106: E225 missing whitespace around operator
+109: E265 block comment should start with '# '
+111: E265 block comment should start with '# '
+114: E265 block comment should start with '# '
+116: E265 block comment should start with '# '
+119: E265 block comment should start with '# '
+121: E265 block comment should start with '# '
+128: E265 block comment should start with '# '
+129: E225 missing whitespace around operator
+130: E265 block comment should start with '# '
+133: E265 block comment should start with '# '
+135: E265 block comment should start with '# '
+152: E302 expected 2 blank lines, found 1
+167: E231 missing whitespace after ','
+167: E231 missing whitespace after ','
+173: E128 continuation line under-indented for visual indent
+174: E128 continuation line under-indented for visual indent
+175: E128 continuation line under-indented for visual indent
+177: W291 trailing whitespace
+191: E302 expected 2 blank lines, found 1
+204: E231 missing whitespace after ','
+204: E231 missing whitespace after ','
+210: E128 continuation line under-indented for visual indent
+211: E128 continuation line under-indented for visual indent
+212: E128 continuation line under-indented for visual indent
+223: E302 expected 2 blank lines, found 1
+250: E231 missing whitespace after ','
+250: E231 missing whitespace after ','
+253: W291 trailing whitespace
+254: W291 trailing whitespace
+255: W291 trailing whitespace
+257: E128 continuation line under-indented for visual indent
+257: W291 trailing whitespace
+258: E128 continuation line under-indented for visual indent
+258: W291 trailing whitespace
+259: E128 continuation line under-indented for visual indent
+260: E225 missing whitespace around operator
+277: W293 blank line contains whitespace
+396: E302 expected 2 blank lines, found 1
+408: E231 missing whitespace after ','
+408: E231 missing whitespace after ','
+408: W291 trailing whitespace
+411: W291 trailing whitespace
+412: W291 trailing whitespace
+413: W291 trailing whitespace
+415: E128 continuation line under-indented for visual indent
+415: W291 trailing whitespace
+416: E128 continuation line under-indented for visual indent
+416: W291 trailing whitespace
+417: E128 continuation line under-indented for visual indent
+418: E225 missing whitespace around operator
+421: W293 blank line contains whitespace
+441: W293 blank line contains whitespace
+442: E302 expected 2 blank lines, found 1
+452: E275 missing whitespace after keyword
+452: E231 missing whitespace after ','
+452: E711 comparison to None should be 'if cond is None
+455: E225 missing whitespace around operator
+461: E302 expected 2 blank lines, found 1
+483: E302 expected 2 blank lines, found 1
+485: W291 trailing whitespace
+492: E225 missing whitespace around operator
+496: E302 expected 2 blank lines, found 1
+498: W291 trailing whitespace
+503: E711 comparison to None should be 'if cond is None
+504: E225 missing whitespace around operator
+510: E302 expected 2 blank lines, found 1
+512: E225 missing whitespace around operator
+518: E225 missing whitespace around operator
+522: E305 expected 2 blank lines after class or function definition, found 1
+
+Resolution: fixed all erros as presented in list above, final result shows:
+
+Results:
+All clear, no errors found
+
 ## References 
 Skip first row: https://stackoverflow.com/questions/30871545/iterating-through-a-list-of-lists-skip-the-first-list
 
