@@ -91,13 +91,25 @@ def newCustomer():
     The method will then call the constructor of the Customer Class passing the inputed details as parameters
     and also use the apend_row method of worksheets to add a new line (new customer) to the Google Sheet
     """
-    print('Enter new customer details: \n')
+    print("Let's crete a new customer!")
+    print('Note: Email address will be used as a customer key and must be unique.')
+    print("If you are not sure of existing email addresses, use the List All Customers option to review the customer's list.")
+    print('Provide new customer details as requested below:\n')
+    #check input for a valid email pattern
+    tempEmail = validateEmail(input('Email: \n'))
+    #check duplicate email addresses
+    email = checkDuplicate(tempEmail)
+    print('')
     name = input('Name: \n')
+    print('')
     surname = input('Surname: \n')
+    print('')
     phone = input('Phone: \n')
-    email = validateEmail(input('Email: \n'))
+    print('')
     address = input('Address: \n')
+    print('')
     city = input('City: \n')
+    print('')
     country = input('Country: \n')
 
     customer = Customer(name, surname, phone, email, address, city, country)
@@ -361,10 +373,37 @@ def deleteCustomer():
     menu()
       
 def validateEmail(email):
+    """
+    The validateEmail() method will check for valid characters inputed by the user.
+    Returns the email address to be added in the new customer record in case it's validated and
+    requests new input providing an example of acceptable pattern in case the user types an invalid email address.
+    Credits: https://acervolima.com/verifique-se-o-endereco-de-e-mail-e-valido-ou-nao-em-python/
+    """
     regex = r'^[a-z0-9]+[\._]?[a-z0-9]+[@]\w+[.]\w{2,3}$'
     if(re.search(regex,email)) == None:
         print('!!! Invalid email address !!!')
-        validateEmail(input('Enter email (e.g. email@email.com): \n'))
+        print('')
+        email = validateEmail(input('Enter email (e.g. email@email.com): \n'))
+        return email
+    else:
+        print(f'Email no else do validate: {email}')
+        return email
+
+def checkDuplicate(email):
+    """
+    The checkDuplicate() method will retrieve a list with current emails existing in the GoogleSheet and
+    in case the email already exists, it will request the user to input a new email address, otherwise
+    add the inputed email to the correspondent attribute of new customer.
+    """
+    currentList = SHEET.worksheet('details').col_values(4)
+    if (email in currentList):
+        print('')
+        print('Customer already exists')
+        print('')
+        tempEmail = validateEmail(input('Enter a new email: \n'))
+        email = checkDuplicate(tempEmail)
+        return email
     else:
         return email
+
 menu()

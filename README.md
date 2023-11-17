@@ -70,9 +70,41 @@ python3 run.py
 
 Resolution: As the regex cannot be changed, added the r for raw string as suggested in https://stackoverflow.com/questions/52335970/how-to-fix-string-deprecationwarning-invalid-escape-sequence-in-python
 
+### 4 Invalid Argument
+Traceback (most recent call last):
+  File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 393, in <module>
+    menu()
+  File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 62, in menu
+    newCustomer()
+  File "/Users/aleksandrocandido/Documents/Code Institute/P3/p3/run.py", line 101, in newCustomer
+    currentList = SHEET.worksheet('details').get_values('D')
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/gspread/utils.py", line 739, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/gspread/worksheet.py", line 487, in get_values
+    vals = fill_gaps(self.get(range_name, **kwargs))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/gspread/utils.py", line 739, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/gspread/worksheet.py", line 1027, in get
+    response = self.spreadsheet.values_get(range_name, params=params)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/gspread/spreadsheet.py", line 175, in values_get
+    r = self.client.request("get", url, params=params)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.12/lib/python3.12/site-packages/gspread/client.py", line 93, in request
+    raise APIError(response)
+gspread.exceptions.APIError: {'code': 400, 'message': "Unable to parse range: 'details'!D", 'status': 'INVALID_ARGUMENT'}
+
+Resolution: replace get_values() by col_values(): SHEET.worksheet('details').col_values(4)
+
 ## References 
 Skip first row: https://stackoverflow.com/questions/30871545/iterating-through-a-list-of-lists-skip-the-first-list
 
 Concepts of working with Dictionaries in Python: https://www.youtube.com/watch?v=Ye7HS0JXNYE&t=2s
 
 Delete rows: https://www.youtube.com/watch?v=6H6pNXFZZg8&t=423s
+
+Validate Email method provided by https://acervolima.com/verifique-se-o-endereco-de-e-mail-e-valido-ou-nao-em-python/
