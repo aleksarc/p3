@@ -108,3 +108,5 @@ Concepts of working with Dictionaries in Python: https://www.youtube.com/watch?v
 Delete rows: https://www.youtube.com/watch?v=6H6pNXFZZg8&t=423s
 
 Validate Email method provided by https://acervolima.com/verifique-se-o-endereco-de-e-mail-e-valido-ou-nao-em-python/
+
+Validate string inputs for letters only: https://acervolima.com/python-string-isalpha-e-sua-aplicacao/

@@ -101,7 +101,9 @@ def newCustomer():
     email = checkDuplicate(tempEmail)
     print('')
     #validate name input for letters only)
-    name = validateString(input('Name: \n'))
+    tempName = validateString(input('Name: \n'))
+    #check if value is empty or null
+    name = checkNonEmptyNull(tempName)
     print('')
     #validate lastname input for letters only)
     lastname = validateString(input('Last Name: \n'))
@@ -415,7 +417,13 @@ def validateString(data):
     if data.isalpha():
         return data
     else:
-        data = validateString(input('Invalid input, enter new value (only letters allowed: )\n'))
+        data = validateString(input('Invalid input, enter new value (only letters allowed): \n'))
         return data
 
+def checkNonEmptyNull(data):
+    if data == None or data == '':
+        data = checkNonEmptyNull(input('Value cannot be empty or null. Type new value: \n'))
+        return data
+    else:
+        return data
 menu()
