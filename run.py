@@ -263,7 +263,8 @@ def updateCustomer():
         else:
             None
 
-    key = validateEmail((input('Enter the email of the customer to update: \n')))
+    key = validateEmail((input('Enter the email of the customer to '
+                               + 'update: \n')))
     if key in customers:
         print('')
         print('Customer found: \n')
