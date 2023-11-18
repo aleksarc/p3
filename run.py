@@ -79,9 +79,6 @@ def menu():
         print('## Program finished ##')
         print('======================\n')
         print('')
-    elif option == 7:
-        email = input('Enter email: \n')
-        validateEmail(email)
     else:
         print('')
         print('====================')
@@ -467,8 +464,8 @@ def deleteCustomer():
     print('Deleting customer...')
     SHEET.worksheet('details').delete_rows(int(tempInd))
     print('')
-    print(f'Customer {customers[key]['name']} {customers[key]['lastname']}'
-          + '({key}) was deleted.')
+    print(f'Customer {customers[key]['name']} {customers[key]['lastname']} was'
+          + ' deleted.')
     menu()
 
 
