@@ -62,19 +62,19 @@ def menu():
         [6] Exit
         '''
     )
-    option = int(input('Type an option number: \n'))
+    option = input('Type an option number: \n')
     print('')
-    if option == 1:
+    if option == '1':
         newCustomer()
-    elif option == 2:
+    elif option == '2':
         updateCustomer()
-    elif option == 3:
+    elif option == '3':
         deleteCustomer()
-    elif option == 4:
+    elif option == '4':
         listSingleCustomer()
-    elif option == 5:
+    elif option == '5':
         listAllCustomers()
-    elif option == 6:
+    elif option == '6':
         print('======================')
         print('## Program finished ##')
         print('======================\n')
@@ -293,9 +293,9 @@ def updateCustomer():
         '''
     )
     inpt = input('Enter the option number: \n')
-
+    print('')
     # update name
-    if int(inpt) == 1:
+    if inpt == '1':
         print('')
         data = validateString(input('Enter the new value: \n'))
         print('')
@@ -310,7 +310,7 @@ def updateCustomer():
         print(customers[key])
         menu()
     # update lastname
-    elif int(inpt) == 2:
+    elif inpt == '2':
         print('')
         data = validateString(input('Enter the new value: \n'))
         print('')
@@ -325,7 +325,7 @@ def updateCustomer():
         print(customers[key])
         menu()
     # update phone
-    elif int(inpt) == 3:
+    elif inpt == '3':
         print('')
         data = input('Enter the new value: \n')
         print('')
@@ -349,7 +349,7 @@ def updateCustomer():
     # worksheet.
     # currently is not possible to replace a key value in a dictionary
     # thus the above workaround used
-    elif int(inpt) == 4:
+    elif inpt == '4':
         print('')
         data = validateEmail(input('Enter the new value: \n'))
         print('')
@@ -366,7 +366,7 @@ def updateCustomer():
         print(customers[key])
         menu()
     # update address
-    elif int(inpt) == 5:
+    elif inpt == '5':
         print('')
         data = input('Enter the new value: \n')
         print('')
@@ -381,7 +381,7 @@ def updateCustomer():
         print(customers[key])
         menu()
     # update city
-    elif int(inpt) == 6:
+    elif inpt == '6':
         print('')
         data = validateString(input('Enter the new value: \n'))
         print('')
@@ -396,7 +396,7 @@ def updateCustomer():
         print(customers[key])
         menu()
     # update country
-    elif int(inpt) == 7:
+    elif inpt == '7':
         print('')
         data = validateString(input('Enter the new value: \n'))
         print('')
