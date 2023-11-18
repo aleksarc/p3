@@ -543,6 +543,13 @@ def checkNonEmptyNull(data):
 
 
 def validatePhone(phone):
+    """
+    The validatePhone() method validates if the inputed value is shorter than
+    10 numbers and also if it's only comprised of numbers by using the
+    isdecimal() function.
+    Using this method the user is required to input a valid 10 digits number
+    which attends for most of the phone numbers known today.
+    """
     if len(phone) > 10:
         phone = validatePhone(input('Type phone number with max 10' +
                                     ' digits: \n'))
