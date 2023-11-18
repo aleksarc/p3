@@ -266,7 +266,7 @@ def updateCustomer():
         else:
             None
 
-    key = input('Enter the email of the customer to update: \n')
+    key = validateEmail((input('Enter the email of the customer to update: \n')))
     if key in customers:
         print('')
         print('Customer found: \n')
@@ -294,9 +294,10 @@ def updateCustomer():
     )
     inpt = input('Enter the option number: \n')
 
+    # update name
     if int(inpt) == 1:
         print('')
-        data = input('Enter the new value: \n')
+        data = validateString(input('Enter the new value: \n'))
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 1, str(data))
@@ -308,9 +309,10 @@ def updateCustomer():
         print('')
         print(customers[key])
         menu()
+    # update lastname
     elif int(inpt) == 2:
         print('')
-        data = input('Enter the new value: \n')
+        data = validateString(input('Enter the new value: \n'))
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 2, str(data))
@@ -322,6 +324,7 @@ def updateCustomer():
         print('')
         print(customers[key])
         menu()
+    # update phone
     elif int(inpt) == 3:
         print('')
         data = input('Enter the new value: \n')
@@ -336,9 +339,19 @@ def updateCustomer():
         print('')
         print(customers[key])
         menu()
+    # update email
+    # here the email key will be replaced, thus the current row will be
+    # removed from the worksheet and a new row will be created
+    # for this to happen, the current value is copied to a temp list
+    # in the dictionary, a new email key is provided and these temp
+    # data attributed to the new key, with the new key and values
+    # copied from the previous customer, a new row will be added to the
+    # worksheet.
+    # currently is not possible to replace a key value in a dictionary
+    # thus the above workaround used
     elif int(inpt) == 4:
         print('')
-        data = input('Enter the new value: \n')
+        data = validateEmail(input('Enter the new value: \n'))
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 4, str(data))
@@ -352,6 +365,7 @@ def updateCustomer():
         print('')
         print(customers[key])
         menu()
+    # update address
     elif int(inpt) == 5:
         print('')
         data = input('Enter the new value: \n')
@@ -366,9 +380,10 @@ def updateCustomer():
         print('')
         print(customers[key])
         menu()
+    # update city
     elif int(inpt) == 6:
         print('')
-        data = input('Enter the new value: \n')
+        data = validateString(input('Enter the new value: \n'))
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 6, str(data))
@@ -380,9 +395,10 @@ def updateCustomer():
         print('')
         print(customers[key])
         menu()
+    # update country
     elif int(inpt) == 7:
         print('')
-        data = input('Enter the new value: \n')
+        data = validateString(input('Enter the new value: \n'))
         print('')
         print('Updating customer...')
         SHEET.worksheet('details').update_cell(int(tempInd), 7, str(data))
@@ -394,6 +410,7 @@ def updateCustomer():
         print('')
         print(customers[key])
         menu()
+    # return error if all validations failed
     else:
         print('Something went wrong :(')
         menu()
@@ -401,7 +418,16 @@ def updateCustomer():
 
 def deleteCustomer():
     """
-    ??????
+    The delteCustomer() method will take an input of email to find the customer
+    using the email key.
+    Once found, the customer will be shown in the screen and subssequentially
+    deleted from the Google Sheet.
+    The email key is used to find the customers in the worksheet, and a
+    tempIndex (numeric value) will identify the customer's index in the
+    worksheet. This tempIndex will be used to send a delete_row() command
+    to delete the customer from the worksheet.
+    Finally, a customer deleted message will be shown to the user. At this
+    point the customer was already deleted from the worksheet.
     """
     details = SHEET.worksheet('details').get_values()
     customers = {}
@@ -425,7 +451,7 @@ def deleteCustomer():
         else:
             None
 
-    key = input('Enter the email of the customer to delete: \n')
+    key = validateEmail(input('Enter the email of the customer to delete: \n'))
     if key in customers:
         print('')
         print('Customer found: \n')
@@ -499,7 +525,7 @@ def validateString(data):
         return data
     else:
         data = validateString(input('Invalid input, enter new value (only' +
-                                    'letters allowed): \n'))
+                                    ' letters allowed): \n'))
         return data
 
 
@@ -512,7 +538,7 @@ def checkNonEmptyNull(data):
     """
     if data is None or data == '':
         data = checkNonEmptyNull(input('Value cannot be empty or null.' +
-                                       'Type new value: \n'))
+                                       ' Type new value: \n'))
         return data
     else:
         return data
@@ -521,13 +547,13 @@ def checkNonEmptyNull(data):
 def validatePhone(phone):
     if len(phone) > 10:
         phone = validatePhone(input('Type phone number with max 10' +
-                                    'digits: \n'))
+                                    ' digits: \n'))
         return phone
     elif phone.isdecimal():
         return phone
     else:
         phone = validatePhone(input('Type a valida phone (only numbers' +
-                                    'allowed): \n'))
+                                    ' allowed): \n'))
         return phone
 
 

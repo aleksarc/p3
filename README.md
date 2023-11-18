@@ -100,7 +100,7 @@ gspread.exceptions.APIError: {'code': 400, 'message': "Unable to parse range: 'd
 
 Resolution: replace get_values() by col_values(): SHEET.worksheet('details').col_values(4)
 
-### 5 PIP8 Heroku validation errors found:
+### 5 PEP8 Heroku validation errors found:
 
 Results:
 24: E302 expected 2 blank lines, found 1
