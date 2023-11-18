@@ -178,7 +178,7 @@ def listSingleCustomer():
                                          'country': customer.country}
         else:
             None
-    key = input('Type customer email: \n')
+    key = validateEmail(input('Type customer email: \n'))
     if key in customers:
         print('')
         print('Customer found: \n')
