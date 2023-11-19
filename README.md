@@ -6,7 +6,7 @@ With this app, users can add, update, delete and search customers from the datab
 
 The app uses Google Drive and Google Sheets APIs to perform CRUD actions.
 
-[Here's the link](https://herokugoeshere!!!) to access the Customers app.
+[Here's the link](https://codeinstitutep3-c9bb1c5348b1.herokuapp.com/) to access the Customers app live version.
 
 ## What to expect?
 
@@ -121,9 +121,9 @@ Dictionary =  used within the methods to retrieve details from the Google Sheet 
 
 Testing was done by "impersonating" a user, typing invalid data to confirm the validation methods are working as expected and that the methods are correctly perfoming the expected action such as adding new customer to Google Sheets, deleting, updating or searching.
 
-Here's a video recording of the validation performed in my terminal: [Video Recording](https://drive.google.com/file/d/1FdYGxN19AphYcSx68tIsYaPtsNiBXuC8/view?usp=sharing)
+Here's a video recording of the validation performed in my terminal: [My Terminal Testing](https://drive.google.com/file/d/1FdYGxN19AphYcSx68tIsYaPtsNiBXuC8/view?usp=sharing)
 
-Same tests were performed in the Code Institute Heroku terminal as well.
+Same tests were performed in the Code Institute Heroku terminal as well: [Heroku Testing](https://drive.google.com/file/d/1VvMHaYmYQVLCHN1vvOsI2za-jEj01-57/view?usp=sharing)
 
 The code was also submited to https://pep8ci.herokuapp.com/# validator and the errors identified were fixed. The final result from the validator was presenting no errors. More details in the Bugs section below.
 
