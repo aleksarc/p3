@@ -8,6 +8,8 @@ The app uses Google Drive and Google Sheets APIs to perform CRUD actions.
 
 [Here's the link](https://codeinstitutep3-c9bb1c5348b1.herokuapp.com/) to access the Customers app live version.
 
+[Google Sheets link](https://docs.google.com/spreadsheets/d/1vSYBUH-zlALq2GmduILPV-9xfg7omhUa2ex1UWoAOn0/edit?usp=sharing) to check the operations performed with the app.
+
 ## What to expect?
 
 The customers app will allow users to add, update, remove and search customers from the Google Sheet worksheet (database).
