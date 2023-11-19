@@ -283,6 +283,27 @@ Resolution: fixed all erros as presented in list above, final result shows no er
 
 ![PEP8 validator screnshot](./assets/images/PEP8_validated.png)
 
+### 6) Heroku deployment
+
+While deploying the app to Heroku the following error happened:
+
+Running startup command: python3 run.py
+
+  File "/app/run.py", line 468
+    print(f'Customer {customers[key]['name']} {customers[key]['lastname']} was'
+                                      ^^^^
+SyntaxError: f-string: unmatched '['
+
+Resolution: changed the code from:
+
+print(f'Customer {customers[key]['name']} {customers[key]['lastname']} was deleted.')
+
+to:
+
+customerName = {customers[key]['name']}
+customerLastName = {customers[key]['lastname']} 
+print(f'Customer {customerName} {customerLastName} was deleted.')
+
 ## References
 
 - Skip first row (headers) while retriebing data from Google Sheets: https://stackoverflow.com/questions/30871545/iterating-through-a-list-of-lists-skip-the-first-list

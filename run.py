@@ -465,8 +465,9 @@ def deleteCustomer():
     print('Deleting customer...')
     SHEET.worksheet('details').delete_rows(int(tempInd))
     print('')
-    print(f'Customer {customers[key]['name']} {customers[key]['lastname']} was'
-          + ' deleted.')
+    customerName = {customers[key]['name']}
+    customerLastName = {customers[key]['lastname']} 
+    print(f'Customer {customerName} {customerLastName} was deleted.')
     menu()
 
 
