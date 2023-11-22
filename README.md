@@ -308,6 +308,17 @@ customerName = {customers[key]['name']}
 customerLastName = {customers[key]['lastname']} 
 print(f'Customer {customerName} {customerLastName} was deleted.')
 
+## Deployment
+
+This project was depoloyed using Code Institute's mock terminal for Heroku.
+
+- Steps for deployment:
+  - Fork or clone this repository
+  - Create a new Heroku app
+  - Set the buildbacks to Python and Node JS in that order
+  - Link the Herokou app to the repository
+  - Click on Deploy
+
 ## References
 
 - Skip first row (headers) while retriebing data from Google Sheets: https://stackoverflow.com/questions/30871545/iterating-through-a-list-of-lists-skip-the-first-list
